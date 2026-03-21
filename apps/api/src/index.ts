@@ -27,37 +27,6 @@ app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')))
 // Auth routes
 app.all('/api/auth/*splat', toNodeHandler(auth))
 
-// File upload endpoint
-app.post('/api/upload/:projectId', upload.single('file'), async (req, res) => {
-  try {
-    if (!req.file) {
-      res.status(400).json({ error: 'No file provided' })
-      return
-    }
-
-    const { projectId } = req.params
-    const timestamp = Date.now()
-    const safeName = req.file.originalname.replace(/[^a-zA-Z0-9.\-_]/g, '_')
-    const filename = `${projectId}_${timestamp}_${safeName}`
-
-    await storage.save(req.file.buffer, filename, req.file.mimetype)
-
-    const file = await prisma.file.create({
-      data: {
-        projectId,
-        name: req.file.originalname,
-        url: storage.getUrl(filename),
-        uploadedBy: 'client',
-      },
-    })
-
-    res.json(file)
-  } catch (err) {
-    console.error(err)
-    res.status(500).json({ error: 'Upload failed' })
-  }
-})
-
 // tRPC routes
 app.use('/api/trpc', createExpressMiddleware({
   router: appRouter,
@@ -79,7 +48,7 @@ app.post('/api/upload/:projectId', upload.single('file'), async (req, res) => {
       return
     }
 
-    const { projectId } = req.params
+    const projectId = req.params.projectId as string
     const timestamp = Date.now()
     const safeName = req.file.originalname.replace(/[^a-zA-Z0-9.\-_]/g, '_')
     const filename = `${projectId}_${timestamp}_${safeName}`

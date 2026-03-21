@@ -1,27 +1,20 @@
 {
   "name": "@av-portal/db",
   "version": "1.0.0",
-  "description": "",
   "main": "src/client.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "studio": "prisma studio",
-    "migrate": "prisma migrate dev",
+    "studio":   "prisma studio",
+    "migrate":  "prisma migrate dev",
     "generate": "prisma generate"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.32.1",
   "dependencies": {
-    "@prisma/adapter-pg": "^7.5.0",
-    "@prisma/client": "^7.5.0",
-    "dotenv": "^17.3.1",
-    "pg": "^8.20.0",
-    "prisma": "^7.5.0"
+    "@prisma/adapter-pg": "latest",
+    "@prisma/client":     "latest",
+    "dotenv":             "latest",
+    "pg":                 "8.11.3"
   },
   "devDependencies": {
-    "@types/pg": "^8.20.0",
-    "prisma": "latest"
+    "@types/pg": "8.11.11",
+    "prisma":    "latest"
   }
 }
