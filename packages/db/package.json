@@ -5,7 +5,8 @@
   "scripts": {
     "studio":   "prisma studio",
     "migrate":  "prisma migrate dev",
-    "generate": "prisma generate"
+    "generate": "prisma generate",
+    "build": "tsc"
   },
   "dependencies": {
     "@prisma/adapter-pg": "latest",
