@@ -23,7 +23,10 @@ export const auth = betterAuth({
     },
     secret: process.env.AUTH_SECRET!,
     baseURL: process.env.API_URL ?? 'http://localhost:3001',
-    trustedOrigins: ['http://localhost:3000'],
+    trustedOrigins: [
+    'http://localhost:3000',
+    'https://av-portal-bi28sjtyv-alecpullen1s-projects.vercel.app/',
+    ],
 })
 
 export type Auth = typeof auth
