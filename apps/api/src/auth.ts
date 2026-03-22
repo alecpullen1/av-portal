@@ -31,6 +31,16 @@ export const auth = betterAuth({
         ...(process.env.PORTAL_URL ? [process.env.PORTAL_URL] : []),
         ...(process.env.RAILWAY_PUBLIC_DOMAIN ? [`https://${process.env.RAILWAY_PUBLIC_DOMAIN}`] : []),
     ],
+    advanced: {
+    crossSubdomainCookies: {
+      enabled: false,
+    },
+    defaultCookieAttributes: {
+      sameSite: 'none',
+      secure: true,
+      partitioned: true,
+    },
+  },
 })
 
 export type Auth = typeof auth
