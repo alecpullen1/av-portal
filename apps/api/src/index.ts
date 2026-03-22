@@ -14,12 +14,27 @@ import { sendEmail } from './email/send'
 const app = express()
 const upload = multer({ storage: multer.memoryStorage() })
 
-const portalOrigin = process.env.PORTAL_URL
-  ?? (process.env.RAILWAY_PUBLIC_DOMAIN ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` : null)
-  ?? 'http://localhost:3000'
+const allowedOrigins: string[] = [
+  'http://localhost:3000',
+  'https://av-portal.vercel.app',
+  'https://av-portal-alecpullen1s-projects.vercel.app',
+  'https://av-portal-git-main-alecpullen1s-projects.vercel.app',
+]
+
+if (process.env.PORTAL_URL) {
+  allowedOrigins.push(process.env.PORTAL_URL)
+}
+if (process.env.RAILWAY_PUBLIC_DOMAIN) {
+  allowedOrigins.push(`https://${process.env.RAILWAY_PUBLIC_DOMAIN}`)
+}
 
 app.use(cors({
-  origin: portalOrigin,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (e.g. server-to-server, curl)
+    if (!origin) return callback(null, true)
+    if (allowedOrigins.includes(origin)) return callback(null, true)
+    callback(new Error(`CORS: origin '${origin}' not allowed`))
+  },
   credentials: true,
 }))
 
