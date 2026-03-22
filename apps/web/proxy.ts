@@ -2,10 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const PUBLIC_ROUTES = ['/login', '/invite', '/api']
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Allow public routes and all API routes through
   if (PUBLIC_ROUTES.some(route => pathname.startsWith(route))) {
     return NextResponse.next()
   }
