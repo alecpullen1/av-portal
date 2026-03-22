@@ -13,6 +13,7 @@ import { sendEmail } from './email/send'
 
 const app = express()
 const upload = multer({ storage: multer.memoryStorage() })
+const PORT = parseInt(process.env.PORT ?? '3001')
 
 const allowedOrigins: string[] = [
   'http://localhost:3000',
@@ -55,8 +56,12 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok' })
 })
 
-app.listen(3001, () => {
-  console.log('API running on http://localhost:3001')
+// app.listen(3001, () => {
+//   console.log('API running on http://localhost:3001')
+// })
+
+app.listen(PORT, () => {
+    console.log('API running on http://localhost:${PORT}')
 })
 
 // File upload endpoint
