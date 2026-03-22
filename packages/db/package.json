@@ -1,18 +1,19 @@
 {
   "name": "@av-portal/db",
   "version": "1.0.0",
-  "main": "src/client.ts",
+  "main": "dist/client.js",
   "scripts": {
+    "build":    "tsc",
     "studio":   "prisma studio",
     "migrate":  "prisma migrate dev",
-    "generate": "prisma generate",
-    "build": "tsc"
+    "generate": "prisma generate"
   },
   "dependencies": {
     "@prisma/adapter-pg": "latest",
     "@prisma/client":     "latest",
     "dotenv":             "latest",
-    "pg":                 "8.11.3"
+    "pg":                 "8.11.3",
+    "typescript":         "latest"
   },
   "devDependencies": {
     "@types/pg": "8.11.11",
