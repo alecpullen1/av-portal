@@ -23,6 +23,7 @@ export default function LoginPage() {
         })
 
         if (result.error) {
+            console.error('[login] better-auth error:', result.error)
             setError('Invalid email or password')
             setLoading(false)
             return
