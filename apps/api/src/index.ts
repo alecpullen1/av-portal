@@ -14,8 +14,12 @@ import { sendEmail } from './email/send'
 const app = express()
 const upload = multer({ storage: multer.memoryStorage() })
 
+const portalOrigin = process.env.PORTAL_URL
+  ?? (process.env.RAILWAY_PUBLIC_DOMAIN ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` : null)
+  ?? 'http://localhost:3000'
+
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: portalOrigin,
   credentials: true,
 }))
 
